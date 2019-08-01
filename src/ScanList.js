@@ -1,9 +1,7 @@
 import React from 'react';
 import './ScanList.css'
 
-
 class ScanList extends React.Component {
-
     render() {
         return (
             <div>

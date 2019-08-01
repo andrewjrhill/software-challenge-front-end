@@ -55,7 +55,6 @@ export const createScanData = () => [
     },
 ];
 
-
 export const createUserData = () => [
     {
         id: 0,
@@ -71,6 +70,3 @@ export const createUserData = () => [
         name: 'Rich Hickey',
     },
 ];
-
-
-
