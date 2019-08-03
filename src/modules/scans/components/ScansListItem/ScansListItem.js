@@ -1,45 +1,41 @@
 import React from 'react';
-import { MoreVertical, Layers } from 'react-feather';
+import { Edit } from 'react-feather';
 
 import './ScansListItem.scss'
 import PropTypes from 'prop-types';
 
-const ScansListItem = props => {
+const ScansListItem = ({ elevationMax, elevationMin, imageURL, name, userName }) => {
     return (
         <div className="scans-list-item">
             <div className="image-wrapper">
                 <div className="overlay">&nbsp;</div>
 
-                <Layers className="overlay-icon" />
+                <Edit className="overlay-icon" />
 
-                <img src={ props.imageURL } alt={ props.name } />
+                <img src={ imageURL } alt={ name } />
             </div>
 
-            <h2>{ props.name }</h2>
-
-            <button>
-                <MoreVertical />
-            </button>
+            <h2>{ name }</h2>
 
             <ul>
                 <li className="username">
                     <span>Scanned by</span>
-                    { props.userName }
+                    { userName }
                 </li>
 
                 <li className="min-elevation">
                     <span>Min elevation</span>
-                    { props.elevationMin }
+                    { elevationMin }
                 </li>
 
                 <li className="max-elevation">
                     <span>Max elevation</span>
-                    { props.elevationMax }
+                    { elevationMax }
                 </li>
 
                 <li className="mobile-elevation">
                     <span>Elevations</span>
-                    { props.elevationMin } - { props.elevationMax }
+                    { elevationMin } - { elevationMax }
                 </li>
             </ul>
         </div>
