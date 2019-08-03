@@ -1,27 +1,34 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { createScanData, createUserData } from './data';
+import Header from './modules/shared/components/header/Header';
+import ScansList from './modules/scans/containers/ScansList/ScansList';
 
-import Header from './components/shared/header/Header';
-import ScansList from './components/scans/scans-list-component/ScansList';
+function App({ scans, users }) {
+    return (
+        <main className="App">
+            <Header />
 
-class App extends Component {
-    state = {
-        scans: createScanData(),
-        users: createUserData(),
-    };
+            <div className="app-content">
+                <ScansList scans={scans} users={users} />
+            </div>
+        </main>
+    );
+}
 
-    render() {
-        return (
-            <main className="App">
-                <Header />
-
-                <div className="app-content">
-                    <ScansList scans={this.state.scans} users={this.state.users} />
-                </div>
-            </main>
-        );
-    }
+App.propTypes = {
+    scans: PropTypes.arrayOf(PropTypes.shape({
+        elevationMax: PropTypes.number,
+        elevationMin: PropTypes.number,
+        id: PropTypes.number,
+        imageURL: PropTypes.string,
+        name: PropTypes.string,
+        scannedByUserId: PropTypes.number,
+    })).isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+    })).isRequired,
 }
 
 export default App;

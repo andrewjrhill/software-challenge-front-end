@@ -1,7 +1,8 @@
 import React from 'react';
+import { MoreVertical, Layers } from 'react-feather';
+
 import './ScansListItem.scss'
 import PropTypes from 'prop-types';
-import { MoreVertical, Layers } from 'react-feather';
 
 function ScansListItem(props) {
     return (

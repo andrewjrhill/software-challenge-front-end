@@ -1,0 +1,39 @@
+@import './variables';
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown__trigger {
+    display: flex;
+    cursor: pointer;
+    padding: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: $grey-dark;
+    border-radius: 5px;
+    background: $white;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    border: 1px solid $grey-lighter;
+}
+
+.dropdown__content {
+    z-index: 1;
+    display: none;
+    position: absolute;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    background-color: $white;
+    width: calc(100% - 2rem);
+    box-shadow: 0 0 5px 0 $default-box-shadow;
+
+    @include breakpoint($small) {
+        width: auto;
+    }
+}
+
+.dropdown--active .dropdown__content {
+    display: block;
+}
