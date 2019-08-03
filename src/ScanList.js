@@ -1,5 +1,5 @@
 import React from 'react';
-import './ScanList.css'
+import './ScanList.scss'
 
 class ScanList extends React.Component {
     render() {
