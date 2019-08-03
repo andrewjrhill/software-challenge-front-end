@@ -71,33 +71,6 @@
                         font-size: 0.9rem;
                         text-transform: uppercase;
                     }
-
-                    button {
-                        flex: 1;
-                        border: 0;
-                        padding: 0;
-                        display: flex;
-                        cursor: pointer;
-                        font-size: 0.9rem;
-                        border-radius: 5px;
-                        align-items: center;
-                        padding: 0.5rem 1rem;
-                        flex-flow: row nowrap;
-                        justify-content: center;
-                        background-color: $white;
-                        background-color: $grey-light;
-                        transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
-
-                        &:not(:last-child) {
-                            margin-right: 0.5rem;
-                        }
-
-                        &:hover,
-                        &.active {
-                            color: $white;
-                            background-color: $brand-red;
-                        }
-                    }
                 }
             }
         }

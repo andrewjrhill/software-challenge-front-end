@@ -1,0 +1,29 @@
+@import '../../../../styles/variables';
+
+button {
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    background-color: $white;
+    background-color: $grey-light;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+
+    &:not(:last-child) {
+        margin-right: 0.5rem;
+    }
+
+    &:hover,
+    &.active {
+        color: $white;
+        background-color: $brand-red;
+    }
+
+    span {
+        display: flex;
+        font-size: 0.9rem;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
