@@ -13,10 +13,13 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
+            <main className="App">
                 <Header />
-                <ScansList scans={this.state.scans} users={this.state.users} />
-            </div>
+
+                <div className="app-content">
+                    <ScansList scans={this.state.scans} users={this.state.users} />
+                </div>
+            </main>
         );
     }
 }
