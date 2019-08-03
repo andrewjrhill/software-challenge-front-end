@@ -1,0 +1,149 @@
+@import '../../../styles/variables';
+
+.scans-list-item {
+    display: grid;
+    padding: 1rem;
+    grid-gap: 1rem;
+    cursor: pointer;
+    background: $white;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    grid-template-rows: 2rem auto;
+    border: 1px solid $grey-lighter;
+    box-shadow: 0 0 5px 0 transparent;
+    grid-template-columns: 2rem auto 2rem;
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+    @include breakpoint($medium) {
+        grid-template-rows: 1.5rem 3.5rem;
+        grid-template-columns: 6rem auto 2rem;
+    }
+
+    &:hover {
+        border: 1px solid $brand-green;
+        box-shadow: 0 0 5px 0 $default-box-shadow;
+
+        .image-wrapper {
+            .overlay {
+                opacity: 0.5;
+            }
+
+            .overlay-icon {
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            color: $brand-green;
+        }
+    }
+
+    .image-wrapper {
+        width: 2rem;
+        height: 2rem;
+        position: relative;
+        grid-area: 1 / 1 / span 1 / span 1;
+
+        @include breakpoint($medium) {
+            width: 6rem;
+            height: 6rem;
+        }
+
+        .overlay {
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border-radius: 5px;
+            background-color: $brand-green;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .overlay-icon {
+            opacity: 0;
+            color: $white;
+            position: absolute;
+            top: calc(50% - 12px);
+            left: calc(50% - 12px);
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    }
+
+    > button {
+        border: 0;
+        padding: 0;
+        justify-self: flex-end;
+        background-color: $white;
+        grid-area: 1 / 3 / span 1 / span 1;
+
+        svg {
+            color: $grey-dark;
+        }
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 1rem;
+        color: $blue-dark;
+        align-self: center;
+        transition: color 0.3s ease-in-out;
+        grid-area: 1 / 2 / span 1 / span 1;
+
+        @include breakpoint($medium) {
+            font-size: 1.1rem;
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        display: grid;
+        padding-top: 1rem;
+        list-style-type: none;
+        grid-template-rows: auto auto;
+        grid-template-columns: 60% 1fr;
+        grid-area: 2 / 1 / span 1 / span 3;
+        border-top: 1px solid $grey-lighter;
+
+        @include breakpoint($medium) {
+            grid-gap: 1rem;
+            grid-template-rows: auto;
+            grid-area: 2 / 2 / span 1 / span 2;
+            grid-template-columns: repeat(2, 33%) 1fr;
+        }
+
+        li {
+            display: flex;
+            font-weight: 500;
+            flex-flow: column nowrap;
+
+            > span {
+                color: $grey;
+                font-size: 0.8rem;
+                margin-bottom: 0.5rem;
+                text-transform: uppercase;
+            }
+
+            &.min-elevation,
+            &.max-elevation {
+                display: none;
+
+                @include breakpoint($medium) {
+                    display: flex;
+                }
+            }
+
+            &.mobile-elevation {
+                @include breakpoint($medium) {
+                    display: none;
+                }
+            }
+        }
+    }
+}

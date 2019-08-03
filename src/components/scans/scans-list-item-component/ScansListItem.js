@@ -1,39 +1,46 @@
 import React from 'react';
 import './ScansListItem.scss'
 import PropTypes from 'prop-types';
-import { MoreVertical } from 'react-feather';
+import { MoreVertical, Layers } from 'react-feather';
 
 function ScansListItem(props) {
     return (
         <div className="scans-list-item">
             <div className="image-wrapper">
+                <div className="overlay">&nbsp;</div>
+
+                <Layers className="overlay-icon" />
+
                 <img src={ props.imageURL } alt={ props.name } />
             </div>
 
-            <div className="scan-details">
-                <h2>{ props.name }</h2>
+            <h2>{ props.name }</h2>
 
-                <button>
-                    <MoreVertical />
-                </button>
+            <button>
+                <MoreVertical />
+            </button>
 
-                <ul>
-                    <li>
-                        <span className="label">Scanned by</span>
-                        { props.userName }
-                    </li>
+            <ul>
+                <li className="username">
+                    <span>Scanned by</span>
+                    { props.userName }
+                </li>
 
-                    <li>
-                        <span className="label">Max elevation</span>
-                        { props.elevationMax }
-                    </li>
+                <li className="min-elevation">
+                    <span>Min elevation</span>
+                    { props.elevationMin }
+                </li>
 
-                    <li>
-                        <span className="label">Min elevation</span>
-                        { props.elevationMin }
-                    </li>
-                </ul>
-            </div>
+                <li className="max-elevation">
+                    <span>Max elevation</span>
+                    { props.elevationMax }
+                </li>
+
+                <li className="mobile-elevation">
+                    <span>Elevations</span>
+                    { props.elevationMin } - { props.elevationMax }
+                </li>
+            </ul>
         </div>
     );
 }
