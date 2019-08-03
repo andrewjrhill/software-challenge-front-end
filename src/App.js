@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
-import ScansList from './components/scans/scans-list-component/ScansList';
+
 import { createScanData, createUserData } from './data';
+
+import Header from './components/shared/header/Header';
+import ScansList from './components/scans/scans-list-component/ScansList';
 
 class App extends Component {
     state = {
@@ -11,13 +14,8 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <header className="App-header">
-                    Software Challenge
-                </header>
-                <ScansList
-                    scans={this.state.scans}
-                    users={this.state.users}
-                />
+                <Header />
+                <ScansList scans={this.state.scans} users={this.state.users} />
             </div>
         );
     }

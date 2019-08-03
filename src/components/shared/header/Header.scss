@@ -1,0 +1,26 @@
+@import '../../../styles/variables.scss';
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px 0 $default-box-shadow;
+
+    .content-wrapper {
+        width: 100%;
+        padding: 1rem;
+        display: flex;
+        max-width: $large;
+        align-items: center;
+        justify-content: flex-start;
+
+        @include breakpoint($medium) {
+            padding: 1.5rem 1rem;
+        }
+    }
+
+    img {
+        width: auto;
+        height: 2.5rem;
+    }
+}
