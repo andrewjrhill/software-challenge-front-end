@@ -5,23 +5,33 @@ import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdow
 
 import './ScansList.scss'
 import ScansListItem from '../../components/ScansListItem/ScansListItem';
-
 import ScansSortButton from '../../components/ScansSortButton/ScansSortButton';
 
 const ScansList = ({ scans, users }) => {
-    const [usersState] = useState(users);
-    const [scansState, setScans] = useState(scans.map(scan => Object.assign(scan, {
+    const [sortState, setSortState] = useState({
+        currentSort: 'name asc',
+        sorts: [
+            { label: 'Name', property: 'name' },
+            { label: 'Username', property: 'userName' },
+            { label: 'Min Elevation', property: 'elevationMax' },
+            { label: 'Max Elevation', property: 'elevationMin' },
+        ],
+    });
+
+    const [scansState, setScansState] = useState(scans.map(scan => Object.assign(scan, {
         userName: users.find(user => user.id === scan.scannedByUserId).name,
     })));
 
     const onSortSelected = (property, direction) => {
+        setSortState(sortState => Object.assign(sortState, { currentSort: `${property} ${direction}` }));
+
         if (!property.includes('elevation')) {
-            return setScans([...scansState].sort((a, b) => direction === 'asc'
+            return setScansState(scansState => [...scansState].sort((a, b) => direction === 'asc'
                 ? a[property].localeCompare(b[property])
                 : b[property].localeCompare(a[property])));
         }
 
-        return setScans([...scansState].sort((a, b) => direction === 'asc'
+        return setScansState(scansState => [...scansState].sort((a, b) => direction === 'asc'
             ? a[property] - b[property]
             : b[property] - a[property]));
     }
@@ -39,37 +49,15 @@ const ScansList = ({ scans, users }) => {
                     </DropdownTrigger>
 
                     <DropdownContent>
-                        <ul>
-                            <li>Name</li>
-                            <li>
-                                <ScansSortButton onClick={ onSortSelected } property='name' direction='asc' />
-                                <ScansSortButton onClick={ onSortSelected } property='name' direction='desc' />
-                            </li>
-                        </ul>
-
-                        <ul>
-                            <li>Username</li>
-                            <li>
-                                <ScansSortButton onClick={ onSortSelected } property='userName' direction='asc' />
-                                <ScansSortButton onClick={ onSortSelected } property='userName' direction='desc' />
-                            </li>
-                        </ul>
-
-                        <ul>
-                            <li>Min Elevation</li>
-                            <li>
-                                <ScansSortButton onClick={ onSortSelected } property='elevationMin' direction='asc' />
-                                <ScansSortButton onClick={ onSortSelected } property='elevationMin' direction='desc' />
-                            </li>
-                        </ul>
-
-                        <ul>
-                            <li>Max Elevation</li>
-                            <li>
-                                <ScansSortButton onClick={ onSortSelected } property='elevationMax' direction='asc' />
-                                <ScansSortButton onClick={ onSortSelected } property='elevationMax' direction='desc' />
-                            </li>
-                        </ul>
+                        {sortState.sorts.map(sort =>
+                            <ul key={ sort.property }>
+                                <li>{ sort.label }</li>
+                                <li>
+                                    <ScansSortButton onClick={ onSortSelected } property={ sort.property } direction='asc' currentSort={ sortState.currentSort } />
+                                    <ScansSortButton onClick={ onSortSelected } property={ sort.property } direction='desc' currentSort={ sortState.currentSort } />
+                                </li>
+                            </ul>
+                        )}
                     </DropdownContent>
                 </Dropdown>
 
@@ -83,7 +71,7 @@ const ScansList = ({ scans, users }) => {
                     imageURL={ scan.imageURL }
                     key={ scan.id }
                     name={ scan.name }
-                    userName={ usersState.find(user => user.id === scan.scannedByUserId).name } />
+                    userName={ scan.userName } />
                 ))}
         </div>
     );
