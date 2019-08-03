@@ -2,7 +2,7 @@ import React from 'react';
 import './Header.scss';
 import logo from '../../../../images/logo.png';
 
-function Header() {
+const Header = () => {
     return (
         <header className="header">
             <div className="content-wrapper">

@@ -4,7 +4,7 @@ import { ChevronsUp, ChevronsDown } from 'react-feather';
 
 import './ScansSortButton.scss';
 
-function ScansSortButton({ onClick, property, direction }) {
+const ScansSortButton = ({ onClick, property, direction }) => {
     return (<button className="ScansSortButton" onClick={ () => { onClick(property, direction) }}>
         { direction && direction === 'asc' ? <span>Ascending <ChevronsUp /></span> : null }
         { direction && direction === 'desc' ? <span>Descending <ChevronsDown /></span> : null }

@@ -4,7 +4,7 @@ import { MoreVertical, Layers } from 'react-feather';
 import './ScansListItem.scss'
 import PropTypes from 'prop-types';
 
-function ScansListItem(props) {
+const ScansListItem = props => {
     return (
         <div className="scans-list-item">
             <div className="image-wrapper">
