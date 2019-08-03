@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
-import './App.css';
-import ScanContainer from "./ScanContainer";
+import ScansList from './components/scans/scans-list-component/ScansList';
+import { createScanData, createUserData } from './data';
 
 class App extends Component {
+    state = {
+        scans: createScanData(),
+        users: createUserData(),
+    };
 
     render() {
         return (
@@ -10,7 +14,10 @@ class App extends Component {
                 <header className="App-header">
                     Software Challenge
                 </header>
-                <ScanContainer />
+                <ScansList
+                    scans={this.state.scans}
+                    users={this.state.users}
+                />
             </div>
         );
     }
