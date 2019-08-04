@@ -87,8 +87,12 @@
             }
         }
 
-        .button-primary {
-            min-width: 7rem;
+        .button-wrapper .button-primary {
+            min-width: 6rem;
+
+            &:not(:last-child) {
+                margin-right: 1rem;
+            }
         }
     }
 }

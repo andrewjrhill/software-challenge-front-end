@@ -58,11 +58,17 @@ function App({ scans, users }) {
         closeEditForm();
     }
 
+    const onScanDelete = (scanId) => {
+        const newScansList = scansState.filter(scan => scan.id !== scanId);
+        setScansState(() => [...newScansList]);
+        closeEditForm();
+    }
+
     return (
         <main className="App">
             <Header />
 
-            <ScansEdit users={ users } scan={ editScanState.scan } active={ editScanState.active } onSubmit={ onScanEditSubmit } onCloseEditForm={ closeEditForm }></ScansEdit>
+            <ScansEdit users={ users } scan={ editScanState.scan } active={ editScanState.active } onSubmit={ onScanEditSubmit } onCloseEditForm={ closeEditForm } onDelete={ onScanDelete }></ScansEdit>
 
             <section className="app-content">
                 <ScansList scansState={ scansState } sortsState={ sortsState } onScansSorted={ onScansSorted } onStartScanEdit={ onStartScanEdit } />

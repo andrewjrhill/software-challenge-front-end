@@ -6,7 +6,7 @@ import { XCircle } from 'react-feather';
 import './ScansEdit.scss'
 
 const ScansEdit = props => {
-    const { users, scan, active, onSubmit, onCloseEditForm } = props;
+    const { users, scan, active, onSubmit, onCloseEditForm, onDelete } = props;
 
     const classes = classnames({
         ScansEdit: true,
@@ -41,7 +41,7 @@ const ScansEdit = props => {
 
     return (
         <div className={ classes }>
-            <form onSubmit={ e => { e.preventDefault(); onSubmit(formData); } }>
+            <form>
                 <h2>Edit Scan</h2>
 
                 <button className="close-button" onClick={ e => { e.preventDefault(); onCloseEditForm(); } }><XCircle /></button>
@@ -68,7 +68,10 @@ const ScansEdit = props => {
                     </select>
                 </label>
 
-                <input className="button-primary" type="submit" value="Submit" />
+                <div className="button-wrapper">
+                    <button className="button-primary" onClick={ e => { e.preventDefault(); onSubmit(formData); } }>Update</button>
+                    <button className="button-primary danger" onClick={ e => { e.preventDefault(); onDelete(id); } }>Delete</button>
+                </div>
             </form>
         </div>
     );
@@ -90,6 +93,7 @@ ScansEdit.propTypes = {
     active: PropTypes.bool,
     onSubmit: PropTypes.func,
     onCloseEditForm: PropTypes.func,
+    onDelete: PropTypes.func,
 }
 
 export default ScansEdit;

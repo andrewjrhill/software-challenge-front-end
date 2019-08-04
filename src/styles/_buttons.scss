@@ -8,4 +8,14 @@
     border-radius: 5px;
     text-transform: uppercase;
     background-color: $brand-green;
+
+    &:hover {
+        opacity: 0.9;
+        background-color: $brand-green;
+    }
+
+    &.danger,
+    &.danger:hover {
+        background-color: $brand-red;
+    }
 }
