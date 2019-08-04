@@ -1,18 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import { createScanData, createUserData } from './data';
+import { createScanData, createUserData } from "./data";
 
-import App from './App';
-import './styles/index.scss';
+import App from "./App";
+import "./styles/index.scss";
 
 const state = {
     scans: createScanData(),
-    users: createUserData(),
+    users: createUserData()
 };
 
 function render() {
-    ReactDOM.render(<App {...state} />, document.getElementById('root'));
+    ReactDOM.render(<App {...state} />, document.getElementById("root"));
 }
 
 render();

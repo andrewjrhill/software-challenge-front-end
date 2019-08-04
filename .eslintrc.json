@@ -3,11 +3,21 @@
         "eslint:recommended",
         "plugin:react/recommended"
     ],
+    "plugins": [
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier": "error"
+    },
     "parserOptions": {
         "ecmaVersion": 7,
         "sourceType": "module",
         "ecmaFeatures": {
-            "jsx": true,
+            "jsx": true
         }
     },
+    "env": {
+        "browser": true,
+        "node": true
+    }
 }
