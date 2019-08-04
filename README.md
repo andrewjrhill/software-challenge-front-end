@@ -1,40 +1,35 @@
-## Imerso Front-end Challenge
+# Imerso Front-End Challenge
 
-Repository containing an incomplete implementation of a "Scan List" web application using React. Help us make it better by completing the tasks below.
+Repository containing a complete implementation of a "Scan List" web application using [React](https://reactjs.org/).
 
+## Resources
 
-### Tasks
+- A live demo of this application can be [accessed from here](https://andrew-hill-imerso-front-end.web.app/).
+- Associated Sketch design files can be [download from here](https://github.com/andrewjrhill/software-challenge-front-end/blob/master/design.sketch).
 
-##### #1 Sorting Scans:
-Create UI and logic to sort the scans by:
+## Features
 
-- Name
-- Username
-- Elevation
+- Fresh new design.
+- Fully responsive.
+- Sorting of scans both Ascending and Descending.
+- Scans CRUD operations.
 
-##### #2 Edit Scan:
-Create UI and logic for editing a scan's name and associated user.
+## Getting Started (OSX)
 
-##### #3 Add Scan:
-Create UI and logic to create new scans
+**1. Clone the repository:**
 
-### General Notes
+```BASH
+git clone https://github.com/andrewjrhill/software-challenge-front-end
+```
 
-- The tasks should be delivered by forking this repo and inviting us to the forked repo. (Don't create a pull request directly to this repo).
-- Don't hesitate asking follow-up questions
-- No need for extensive testing
-- Feel free to use 3rd party libraries
-- Feel free to refactor existing code
-- For bonus points: make the UI look nicer
+**2. Switch to your working directory and install all dependencies:**
 
+```BASH
+cd software-challenge-front-end && npm install
+```
 
-### Build and run:
+**4. Start your application on `localhost:3000`:**
 
-Install:
-#### `npm|yarn install`
-
-Run in development mode:
-#### `npm|yarn start `
-
-
-(This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app))
+```BASH
+npm start
+```
