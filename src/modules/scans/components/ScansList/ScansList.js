@@ -7,7 +7,7 @@ import './ScansList.scss'
 import ScansListItem from '../ScansListItem/ScansListItem';
 import ScansSortButton from '../ScansSortButton/ScansSortButton';
 
-const ScansList = ({ scansState, sortsState, onScansSorted }) => {
+const ScansList = ({ scansState, sortsState, onScansSorted, onStartScanEdit }) => {
     return (
         <div className="ScansList">
             <div className="scans-actions-wrapper">
@@ -40,10 +40,13 @@ const ScansList = ({ scansState, sortsState, onScansSorted }) => {
                 <ScansListItem
                     elevationMax={ scan.elevationMax }
                     elevationMin={ scan.elevationMin }
+                    id={ scan.id }
                     imageURL={ scan.imageURL }
                     key={ scan.id }
                     name={ scan.name }
-                    userName={ scan.userName } />
+                    scannedByUserId={ scan.scannedByUserId }
+                    userName={ scan.userName }
+                    onClick={ onStartScanEdit } />
                 ))}
         </div>
     );
@@ -66,6 +69,7 @@ ScansList.propTypes = {
         })),
     }),
     onScansSorted: PropTypes.func.isRequired,
+    onStartScanEdit: PropTypes.func.isRequired,
 }
 
 export default ScansList;

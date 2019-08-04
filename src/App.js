@@ -6,6 +6,11 @@ import ScansList from './modules/scans/components/ScansList/ScansList';
 import ScansEdit from './modules/scans/containers/ScansEdit/ScansEdit';
 
 function App({ scans, users }) {
+    const [editScanState, setEditScanState] = useState({
+        scan: {},
+        active: false,
+    });
+
     const [scansState, setScansState] = useState(scans.map(scan => Object.assign(scan, {
         userName: users.find(user => user.id === scan.scannedByUserId).name,
     })));
@@ -19,13 +24,6 @@ function App({ scans, users }) {
             { label: 'Max Elevation', property: 'elevationMin' },
         ],
     });
-
-    const onScanEdited = (newScanData) => {
-        const editedIndex = scansState.findIndex(scan => scan.id === newScanData.id);
-        const updatedScans = [...scansState]
-        updatedScans.splice(editedIndex, 1, newScanData);
-        setScansState(() => [...updatedScans]);
-    }
 
     const onScansSorted = (property, direction) => {
         setSortsState(sortsState => Object.assign(sortsState, { currentSort: `${property} ${direction}` }));
@@ -41,14 +39,33 @@ function App({ scans, users }) {
             : b[property] - a[property]));
     }
 
+    const onStartScanEdit = (scan) => {
+        setEditScanState(editScanState => ({
+            scan: Object.assign(editScanState.scan, scan),
+            active: true,
+        }));
+    }
+
+    const closeEditForm = () => {
+        setEditScanState(() => ({ scan: {}, active: false }));
+    }
+
+    const onScanEditSubmit = (newScanData) => {
+        const editedIndex = scansState.findIndex(scan => scan.id === newScanData.id);
+        const updatedScans = [...scansState]
+        updatedScans.splice(editedIndex, 1, newScanData);
+        setScansState(() => [...updatedScans]);
+        closeEditForm();
+    }
+
     return (
         <main className="App">
             <Header />
 
-            <ScansEdit users={ users } scan={ scansState[0] } onSubmit={ onScanEdited }></ScansEdit>
+            <ScansEdit users={ users } scan={ editScanState.scan } active={ editScanState.active } onSubmit={ onScanEditSubmit } onCloseEditForm={ closeEditForm }></ScansEdit>
 
             <section className="app-content">
-                <ScansList scansState={ scansState } sortsState={ sortsState } onScansSorted={ onScansSorted } />
+                <ScansList scansState={ scansState } sortsState={ sortsState } onScansSorted={ onScansSorted } onStartScanEdit={ onStartScanEdit } />
             </section>
         </main>
     );

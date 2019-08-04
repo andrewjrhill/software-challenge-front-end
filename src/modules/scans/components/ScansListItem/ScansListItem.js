@@ -4,9 +4,11 @@ import { Edit } from 'react-feather';
 import './ScansListItem.scss'
 import PropTypes from 'prop-types';
 
-const ScansListItem = ({ elevationMax, elevationMin, imageURL, name, userName }) => {
+const ScansListItem = ({ elevationMax, elevationMin, id, imageURL, name, scannedByUserId, userName, onClick }) => {
+    const scanData = { elevationMax, elevationMin, id, imageURL, name, scannedByUserId, userName };
+
     return (
-        <div className="scans-list-item">
+        <div className="scans-list-item" onClick={ () => onClick(scanData) }>
             <div className="image-wrapper">
                 <div className="overlay">&nbsp;</div>
 
@@ -45,9 +47,12 @@ const ScansListItem = ({ elevationMax, elevationMin, imageURL, name, userName })
 ScansListItem.propTypes = {
     elevationMax: PropTypes.number.isRequired,
     elevationMin: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
     imageURL: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    scannedByUserId: PropTypes.number.isRequired,
     userName: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
 }
 
 export default ScansListItem;
