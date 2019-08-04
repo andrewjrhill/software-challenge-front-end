@@ -7,13 +7,13 @@ import './ScansList.scss'
 import ScansListItem from '../ScansListItem/ScansListItem';
 import ScansSortButton from '../ScansSortButton/ScansSortButton';
 
-const ScansList = ({ scansState, sortsState, onScansSorted, onStartScanEdit }) => {
+const ScansList = ({ scansState, sortsState, onScansSorted, onStartScanUpdate }) => {
     return (
         <div className="ScansList">
             <div className="scans-actions-wrapper">
                 <h1>Scans</h1>
 
-                <p className="results-length">Displaying 1 - { scansState.length } of { scansState.length } results.</p>
+                <p className="results-length">Displaying { scansState.length } results.</p>
 
                 <Dropdown>
                     <DropdownTrigger>
@@ -33,7 +33,7 @@ const ScansList = ({ scansState, sortsState, onScansSorted, onStartScanEdit }) =
                     </DropdownContent>
                 </Dropdown>
 
-                <button className="button-primary create-new-scan">new scan</button>
+                <button className="button-primary create-new-scan" onClick={ () => onStartScanUpdate({}, true) }>new scan</button>
             </div>
 
             {scansState.map(scan => (
@@ -46,7 +46,7 @@ const ScansList = ({ scansState, sortsState, onScansSorted, onStartScanEdit }) =
                     name={ scan.name }
                     scannedByUserId={ scan.scannedByUserId }
                     userName={ scan.userName }
-                    onClick={ onStartScanEdit } />
+                    onClick={ onStartScanUpdate } />
                 ))}
         </div>
     );
@@ -69,7 +69,7 @@ ScansList.propTypes = {
         })),
     }),
     onScansSorted: PropTypes.func.isRequired,
-    onStartScanEdit: PropTypes.func.isRequired,
+    onStartScanUpdate: PropTypes.func.isRequired,
 }
 
 export default ScansList;

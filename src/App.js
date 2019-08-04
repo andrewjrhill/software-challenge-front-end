@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 
 import Header from './modules/shared/components/header/Header';
 import ScansList from './modules/scans/components/ScansList/ScansList';
-import ScansEdit from './modules/scans/containers/ScansEdit/ScansEdit';
+import ScanUpdateModal from './modules/scans/containers/ScanUpdateModal/ScanUpdateModal';
 
 function App({ scans, users }) {
-    const [editScanState, setEditScanState] = useState({
+    const [updateScanState, setUpdateScanState] = useState({
         scan: {},
         active: false,
+        isNew: false,
     });
 
     const [scansState, setScansState] = useState(scans.map(scan => Object.assign(scan, {
@@ -39,39 +40,45 @@ function App({ scans, users }) {
             : b[property] - a[property]));
     }
 
-    const onStartScanEdit = (scan) => {
-        setEditScanState(editScanState => ({
-            scan: Object.assign(editScanState.scan, scan),
+    const onStartScanUpdate = (scan, isNew) => {
+        setUpdateScanState(updateScanState => ({
+            scan: Object.assign(updateScanState.scan, scan),
             active: true,
+            isNew,
         }));
     }
 
-    const closeEditForm = () => {
-        setEditScanState(() => ({ scan: {}, active: false }));
+    const onCloseUpdateScanModal = () => {
+        setUpdateScanState(() => ({ scan: {}, active: false }));
     }
 
-    const onScanEditSubmit = (newScanData) => {
-        const editedIndex = scansState.findIndex(scan => scan.id === newScanData.id);
+    const onScanUpdateSubmit = (newScanData) => {
         const updatedScans = [...scansState]
-        updatedScans.splice(editedIndex, 1, newScanData);
-        setScansState(() => [...updatedScans]);
-        closeEditForm();
+        const updatedIndex = !updateScanState.isNew
+            ? scansState.findIndex(scan => scan.id === newScanData.id)
+            : scansState.length + 1;
+
+        updatedScans.splice(updatedIndex, 1, newScanData);
+
+        setScansState(() => updatedScans);
+
+        onCloseUpdateScanModal();
     }
 
     const onScanDelete = (scanId) => {
         const newScansList = scansState.filter(scan => scan.id !== scanId);
         setScansState(() => [...newScansList]);
-        closeEditForm();
+        onCloseUpdateScanModal();
     }
 
     return (
         <main className="App">
             <Header />
 
-            <ScansEdit users={ users } scan={ editScanState.scan } active={ editScanState.active } onSubmit={ onScanEditSubmit } onCloseEditForm={ closeEditForm } onDelete={ onScanDelete }></ScansEdit>
+            <ScanUpdateModal users={ users } scan={ updateScanState.scan } active={ updateScanState.active } isNew={ updateScanState.isNew } scansLength={ scansState.length } onSubmit={ onScanUpdateSubmit } onCloseUpdateScanModal={ onCloseUpdateScanModal } onDelete={ onScanDelete }></ScanUpdateModal>
 
             <section className="app-content">
-                <ScansList scansState={ scansState } sortsState={ sortsState } onScansSorted={ onScansSorted } onStartScanEdit={ onStartScanEdit } />
+                <ScansList scansState={ scansState } sortsState={ sortsState } onScansSorted={ onScansSorted } onStartScanUpdate={ onStartScanUpdate } />
             </section>
         </main>
     );

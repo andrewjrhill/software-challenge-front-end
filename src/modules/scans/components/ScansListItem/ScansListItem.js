@@ -8,7 +8,7 @@ const ScansListItem = ({ elevationMax, elevationMin, id, imageURL, name, scanned
     const scanData = { elevationMax, elevationMin, id, imageURL, name, scannedByUserId, userName };
 
     return (
-        <div className="scans-list-item" onClick={ () => onClick(scanData) }>
+        <div className="scans-list-item" onClick={ () => onClick(scanData, false) }>
             <div className="image-wrapper">
                 <div className="overlay">&nbsp;</div>
 
