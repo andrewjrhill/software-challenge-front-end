@@ -21,19 +21,37 @@ const ScansEdit = ({ users, scan, onSubmit }) => {
     });
 
     return (
-        <form onSubmit={ e => { e.preventDefault(); onSubmit(formData()); } }>
-            <input type="text" name="name" value={ name } onChange={ e => setName(e.target.value) } />
-            <input type="number" name="elevationMin" value={ elevationMin } onChange={ e => setElevationMin(e.target.value) } />
-            <input type="number" name="elevationMax" value={ elevationMax } onChange={ e => setElevationMax(e.target.value) } />
+        <div className="ScansEdit">
+            <form onSubmit={ e => { e.preventDefault(); onSubmit(formData()); } }>
+                <h2>Edit Scan</h2>
 
-            <select value={ userId } onChange={ e => { setUserId(Number(e.target.value)); setUserName(users.find(user => user.id === Number(e.target.value)).name) } }>
-                { users.map(user => <option
-                    key={ user.id }
-                    value={ user.id }>{ user.name }</option>) }
-            </select>
+                <label>
+                    Name:
+                    <input type="text" name="name" value={ name } onChange={ e => setName(e.target.value) } />
+                </label>
 
-            <input type="submit" value="Submit" />
-        </form>
+                <label>
+                    Elevation Min:
+                    <input type="number" name="elevationMin" value={ elevationMin } onChange={ e => setElevationMin(e.target.value) } />
+                </label>
+
+                <label>
+                    Elevation Max:
+                    <input type="number" name="elevationMax" value={ elevationMax } onChange={ e => setElevationMax(e.target.value) } />
+                </label>
+
+                <label>
+                    Scanned By:
+                    <select value={ userId } onChange={ e => { setUserId(Number(e.target.value)); setUserName(users.find(user => user.id === Number(e.target.value)).name) } }>
+                        { users.map(user => <option
+                            key={ user.id }
+                            value={ user.id }>{ user.name }</option>) }
+                    </select>
+                </label>
+
+                <input className="button-primary" type="submit" value="Submit" />
+            </form>
+        </div>
     );
 }
 
