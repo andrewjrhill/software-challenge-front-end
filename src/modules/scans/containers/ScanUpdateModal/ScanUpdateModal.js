@@ -9,6 +9,7 @@ const ScanUpdateModal = props => {
     const {
         users,
         scan,
+        isNew,
         active,
         onSubmit,
         onCloseUpdateScanModal,
@@ -35,7 +36,7 @@ const ScanUpdateModal = props => {
         setId(!props.isNew ? props.scan.id : props.scansLength + 1);
         setName(props.scan.name || "");
         setScannedByUserId(props.scan.scannedByUserId || 0);
-        setUserName(props.scan.userName || users[0].name);
+        setUserName(props.scan.userName || props.users[0].name);
     }, [props.users, props.scan, props.active, props.isNew, props.scansLength]);
 
     const formData = {
@@ -53,7 +54,7 @@ const ScanUpdateModal = props => {
     return (
         <div className={classes}>
             <form>
-                <h2>Edit Scan</h2>
+                <h2>Manage Scans</h2>
 
                 <button
                     className="close-button"
@@ -128,15 +129,18 @@ const ScanUpdateModal = props => {
                     >
                         Submit
                     </button>
-                    <button
-                        className="button-primary danger"
-                        onClick={e => {
-                            e.preventDefault();
-                            onDelete(id);
-                        }}
-                    >
-                        Delete
-                    </button>
+
+                    {!isNew && (
+                        <button
+                            className="button-primary danger"
+                            onClick={e => {
+                                e.preventDefault();
+                                onDelete(id);
+                            }}
+                        >
+                            Delete
+                        </button>
+                    )}
                 </div>
             </form>
         </div>

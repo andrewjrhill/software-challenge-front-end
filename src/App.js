@@ -22,12 +22,12 @@ function App({ scans, users }) {
     );
 
     const [sortsState, setSortsState] = useState({
-        currentSort: "name asc",
+        currentSort: "",
         sorts: [
             { label: "Name", property: "name" },
             { label: "Username", property: "userName" },
-            { label: "Min Elevation", property: "elevationMax" },
-            { label: "Max Elevation", property: "elevationMin" }
+            { label: "Max Elevation", property: "elevationMax" },
+            { label: "Min Elevation", property: "elevationMin" }
         ]
     });
 
@@ -76,8 +76,12 @@ function App({ scans, users }) {
             : scansState.length + 1;
 
         updatedScans.splice(updatedIndex, 1, newScanData);
-
         setScansState(() => updatedScans);
+
+        if (sortsState.currentSort !== "") {
+            const currentSort = sortsState.currentSort.split(" ");
+            onScansSorted(currentSort[0], currentSort[1]);
+        }
 
         onCloseUpdateScanModal();
     };
